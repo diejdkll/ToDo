@@ -6,13 +6,13 @@
     <data>
         <variable
             name="view"
-            type="com.todo.presentation.MainActivity" />
+            type="com.todo.presentation.ui.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.todo.presentation.MainActivity">
+        tools:context="com.todo.presentation.ui.MainActivity">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/emptyTextView"

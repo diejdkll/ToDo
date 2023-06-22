@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.todo.presentation.viewmodel.InputViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/to_do"
+                android:text="@={viewModel.content}"
                 android:inputType="textMultiLine">
 
                 <requestFocus />
@@ -46,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/meno"
+                android:text="@={viewModel.meno}"
                 android:imeOptions="actionDone"
                 android:inputType="text" />
 
@@ -60,6 +64,8 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
+            android:enabled="@{!viewModel.content.empty}"
+            android:onClick="@{() -> viewModel.insertData()}"
             android:text="@string/input"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
