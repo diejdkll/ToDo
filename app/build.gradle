@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.grapefruit.todo'
+    namespace 'com.todo'
     compileSdk 33
 
     defaultConfig {

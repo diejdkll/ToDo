@@ -1,4 +1,4 @@
-package com.grapefruit.todo
+package com.todo
 
 import org.junit.Test
 
