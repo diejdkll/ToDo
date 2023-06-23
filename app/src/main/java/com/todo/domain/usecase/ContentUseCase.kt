@@ -8,5 +8,7 @@ class ContentUseCase @Inject constructor(
     private val contentRepository: ContentRepository
 ) {
 
+    fun loadList() = contentRepository.loadList()
+
     suspend fun insert(item: Content) = contentRepository.insert(item)
 }

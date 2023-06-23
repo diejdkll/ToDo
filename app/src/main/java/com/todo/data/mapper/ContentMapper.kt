@@ -11,4 +11,11 @@ object ContentMapper {
         meno = meno,
         isDone = isDone
     )
+
+    fun ContentEntity.toContent() = Content(
+        id = id,
+        content = content,
+        meno = meno,
+        isDone = isDone
+    )
 }
