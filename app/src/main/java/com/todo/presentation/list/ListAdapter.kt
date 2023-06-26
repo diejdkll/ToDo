@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.todo.databinding.ItemContentBinding
 import com.todo.domain.model.Content
+import com.todo.presentation.ui.MainActivity
 
-class ListAdapter : androidx.recyclerview.widget.ListAdapter<Content, ContentViewHolder>(diffCallback) {
+class ListAdapter(private val handler: MainActivity.Handler) : androidx.recyclerview.widget.ListAdapter<Content, ContentViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
         return ContentViewHolder(
-            ItemContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemContentBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            handler
         )
     }
 

@@ -11,4 +11,6 @@ class ContentUseCase @Inject constructor(
     fun loadList() = contentRepository.loadList()
 
     suspend fun insert(item: Content) = contentRepository.insert(item)
+
+    suspend fun modify(item: Content) = contentRepository.modify(item)
 }

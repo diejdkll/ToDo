@@ -7,6 +7,7 @@ import com.todo.domain.model.Content
 import com.todo.domain.repository.ContentRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.io.IOException
 import javax.inject.Inject
 
 class ContentRepositoryImpl @Inject constructor(
@@ -21,7 +22,21 @@ class ContentRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun insert(item: Content) {
-        contentDao.insert(item.toEntity())
+    override suspend fun insert(item: Content): Boolean {
+        return try {
+            contentDao.insert(item.toEntity())
+            true
+        } catch (e: IOException) {
+            false
+        }
+    }
+
+    override suspend fun modify(item: Content): Boolean {
+        return try {
+            contentDao.insert(item.toEntity())
+            true
+        } catch (e: IOException) {
+            false
+        }
     }
 }

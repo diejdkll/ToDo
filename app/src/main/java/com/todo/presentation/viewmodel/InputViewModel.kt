@@ -36,17 +36,24 @@ class InputViewModel @Inject constructor(
         if (contentValue.isNullOrBlank()) {
             _doneEvent.value = Pair(false, "할일을 입력해주세요!")
             return
-        } else {
-            viewModelScope.launch(Dispatchers.IO) {
-                contentUseCase.insert(
-                    item?.copy(
-                        content = contentValue,
-                        meno = menoValue
-                    ) ?: Content(
-                        content = contentValue,
-                        meno = menoValue,
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            contentUseCase.insert(
+                item?.copy(
+                    content = contentValue,
+                    meno = menoValue
+                ) ?: Content(
+                    content = contentValue,
+                    meno = menoValue,
+                )
+            ).also {
+                _doneEvent.postValue(
+                    Pair(
+                        true,
+                        if (it as Boolean) "완료!" else "저장 할 수 없습니다."
                     )
-                ).also { _doneEvent.postValue(Pair(true, if (it as Boolean) "완료!" else "저장 할 수 없습니다.")) }
+                )
             }
         }
     }

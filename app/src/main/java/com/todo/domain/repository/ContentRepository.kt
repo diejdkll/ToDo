@@ -7,5 +7,7 @@ interface ContentRepository {
 
     fun loadList(): Flow<List<Content>>
 
-    suspend fun insert(item: Content)
+    suspend fun insert(item: Content): Boolean
+
+    suspend fun modify(item: Content): Boolean
 }

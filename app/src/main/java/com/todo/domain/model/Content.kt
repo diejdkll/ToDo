@@ -1,6 +1,5 @@
 package com.todo.domain.model
 
-import androidx.room.ColumnInfo
 import java.io.Serializable
 
 data class Content(
