@@ -39,4 +39,13 @@ class ContentRepositoryImpl @Inject constructor(
             false
         }
     }
+
+    override suspend fun delete(item: Content): Boolean {
+        return try {
+            contentDao.delete(item.toEntity())
+            true
+        } catch (e: IOException) {
+            false
+        }
+    }
 }

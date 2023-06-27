@@ -13,4 +13,6 @@ class ContentUseCase @Inject constructor(
     suspend fun insert(item: Content) = contentRepository.insert(item)
 
     suspend fun modify(item: Content) = contentRepository.modify(item)
+
+    suspend fun delete(item: Content) = contentRepository.delete(item)
 }

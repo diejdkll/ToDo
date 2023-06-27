@@ -3,7 +3,9 @@ package com.todo.presentation.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -56,6 +58,12 @@ class MainActivity : AppCompatActivity() {
                     adapter.submitList(it)
                 }
         }
+
+        viewModel.doneEvent.observe(this) {
+            if (it.first) {
+                Toast.makeText(this, it.second, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     inner class Handler {
@@ -63,8 +71,22 @@ class MainActivity : AppCompatActivity() {
             InputActivity.start(this@MainActivity, item)
         }
 
-        fun onClickedItem(item: Content) {
-            viewModel.updateItem(item.copy(isDone = !item.isDone))
+        fun onLongClickItem(item: Content): Boolean {
+            AlertDialog.Builder(this@MainActivity)
+                .setTitle("정말 삭제 하시겠습니까?")
+                .setPositiveButton("네") { _, _ ->
+                    viewModel.deleteItem(item)
+                }
+                .setNegativeButton("아니요") { _, _ ->
+
+                }
+                .show()
+
+            return false
+        }
+
+        fun onClickedItem(item: Content, checked: Boolean) {
+            viewModel.updateItem(item.copy(isDone = checked))
         }
     }
 }

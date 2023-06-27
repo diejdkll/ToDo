@@ -1,5 +1,7 @@
 package com.todo.presentation.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.todo.domain.model.Content
@@ -16,6 +18,9 @@ class MainViewModel @Inject constructor(
     private val contentUseCase: ContentUseCase
 ) : ViewModel() {
 
+    private val _doneEvent = MutableLiveData<Pair<Boolean, String>>()
+    val doneEvent: LiveData<Pair<Boolean, String>> = _doneEvent
+
     val contentList = contentUseCase.loadList()
         .stateIn(
             initialValue = emptyList(),
@@ -26,6 +31,14 @@ class MainViewModel @Inject constructor(
     fun updateItem(item: Content) {
         viewModelScope.launch(Dispatchers.IO) {
             contentUseCase.modify(item)
+        }
+    }
+
+    fun deleteItem(item: Content) {
+        viewModelScope.launch(Dispatchers.IO) {
+            contentUseCase.delete(item).also {
+                _doneEvent.postValue(Pair(it, "삭제 완료"))
+            }
         }
     }
 }

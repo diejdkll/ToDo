@@ -1,9 +1,6 @@
 package com.todo.data.source.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.todo.data.entity.ContentEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -15,4 +12,7 @@ interface ContentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: ContentEntity)
+
+    @Delete
+    suspend fun delete(item: ContentEntity)
 }
