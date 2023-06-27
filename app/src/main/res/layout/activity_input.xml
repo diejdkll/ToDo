@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.todo.presentation.viewmodel.InputViewModel" />
@@ -11,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="@dimen/padding">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/contentTextLayoutInput"
@@ -27,8 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/to_do"
+                android:inputType="textMultiLine"
                 android:text="@={viewModel.content}"
-                android:inputType="textMultiLine">
+                android:textAppearance="@style/TextAppearance.App.Large">
 
                 <requestFocus />
             </com.google.android.material.textfield.TextInputEditText>
@@ -39,7 +41,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/contentTextLayoutInput">
@@ -49,9 +51,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/meno"
-                android:text="@={viewModel.meno}"
                 android:imeOptions="actionDone"
-                android:inputType="text" />
+                android:inputType="text"
+                android:text="@={viewModel.meno}"
+                android:textAppearance="@style/TextAppearance.App.Large" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,13 +63,14 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp"
             android:enabled="@{!viewModel.content.empty}"
             android:onClick="@{() -> viewModel.insertData()}"
+            android:paddingStart="@dimen/padding"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingEnd="@dimen/padding"
+            android:paddingBottom="@dimen/padding_small"
             android:text="@string/input"
+            android:textAppearance="@style/TextAppearance.App.Large.Bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
